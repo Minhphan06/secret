@@ -8,22 +8,19 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #ffcccc;
+            background: linear-gradient(to bottom, #ffb6c1, #ff69b4);
             color: #d63384;
             margin: 0;
             padding: 0;
-            overflow: hidden;
-            background-image: url('https://www.transparenttextures.com/patterns/flowers.png');
-            background-size: cover;
-            background-attachment: fixed;
             overflow: auto;
+            position: relative;
         }
         .container {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             padding: 20px;
             position: relative;
         }
@@ -57,23 +54,6 @@
         .button:hover {
             background-color: #b0256e;
         }
-        .heart-effect, .firework {
-            position: absolute;
-            font-size: 2em;
-            color: red;
-            opacity: 1;
-            animation: floatUp 2s ease-out forwards;
-        }
-        @keyframes floatUp {
-            0% {
-                transform: translate(-50%, 0) scale(1);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(-50%, -100px) scale(0.5);
-                opacity: 0;
-            }
-        }
         #letter {
             display: none;
             background: white;
@@ -82,13 +62,38 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             margin-top: 20px;
             max-width: 400px;
+            max-height: 60vh;
+            overflow-y: auto;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .heart-effect, .firework {
+            position: absolute;
+            font-size: 2em;
+            opacity: 1;
+            animation: floatUp 2s ease-out forwards;
+        }
+        @keyframes floatUp {
+            0% { transform: translate(-50%, 0) scale(1); opacity: 1; }
+            100% { transform: translate(-50%, -100px) scale(0.5); opacity: 0; }
+        }
+        .floating-heart {
+            position: absolute;
+            font-size: 2em;
+            color: red;
+            opacity: 0.7;
+            animation: floatAround 5s infinite alternate ease-in-out;
+        }
+        @keyframes floatAround {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(30px, 30px); }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Happy Valentine's Day Changg❤️</h1>
-        <p>Ấn vào trái tim ik!</p>
+        <p>Bấm vào trái tim ik!</p>
         <div class="heart" onclick="showMessage()">❤️</div>
         <button class="button" onclick="showLetter()">Ấn vào đây để đọc thư</button>
         <div id="letter">
@@ -116,9 +121,7 @@
                 heart.style.left = `${x}px`;
                 heart.style.top = `${y}px`;
                 
-                setTimeout(() => {
-                    heart.remove();
-                }, 2000);
+                setTimeout(() => { heart.remove(); }, 2000);
             }
         }
 
@@ -134,15 +137,31 @@
                 firework.style.left = `${x}px`;
                 firework.style.top = `${y}px`;
                 
-                setTimeout(() => {
-                    firework.remove();
-                }, 2000);
+                setTimeout(() => { firework.remove(); }, 2000);
             }
         }
         
         function showLetter() {
-            document.getElementById("letter").style.display = "block";
+            let letter = document.getElementById("letter");
+            letter.style.display = "block";
+            setTimeout(() => { letter.style.opacity = "1"; }, 100);
         }
+
+        function createFloatingHearts() {
+            for (let i = 0; i < 10; i++) {
+                let floatingHeart = document.createElement("div");
+                floatingHeart.classList.add("floating-heart");
+                floatingHeart.innerHTML = "❤️";
+                document.body.appendChild(floatingHeart);
+                
+                let x = Math.random() * window.innerWidth;
+                let y = Math.random() * window.innerHeight;
+                floatingHeart.style.left = `${x}px`;
+                floatingHeart.style.top = `${y}px`;
+            }
+        }
+
+        createFloatingHearts();
     </script>
 </body>
 </html>
