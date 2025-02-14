@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffcccc;
+            color: #d63384;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-image: url('https://www.transparenttextures.com/patterns/flowers.png');
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+            position: relative;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.5em;
+        }
+        .heart {
+            font-size: 5em;
+            animation: heartbeat 1.5s infinite;
+            cursor: pointer;
+        }
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        .button {
+            background-color: #d63384;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .button:hover {
+            background-color: #b0256e;
+        }
+        .heart-effect, .firework {
+            position: absolute;
+            font-size: 2em;
+            color: red;
+            opacity: 1;
+            animation: floatUp 2s ease-out forwards;
+        }
+        @keyframes floatUp {
+            0% {
+                transform: translate(-50%, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -100px) scale(0.5);
+                opacity: 0;
+            }
+        }
+        #letter {
+            display: none;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Happy Valentine's Day Changg❤️</h1>
+        <p>Ấn vào trái tim ik!</p>
+        <div class="heart" onclick="showMessage()">❤️</div>
+        <button class="button" onclick="showLetter()">Ấn vào đây để đọc thư</button>
+        <div id="letter">
+            <p>Xin lũi vì sáng sớm đã làm m khó chịu huhu, t k cố ý đâu.</p>
+            <p>T đã cố học mấy tuần nay để học ròi tự làm đấy(hơi xấu m đừng chê t bùn), suốt ngày cố làm m vui nhưng theo kiểu của t hoi</p>
+            <p>Yêu m nhiều lắm moah❤️ Valentine vui vẻ</p>
+        </div>
+    </div>
+    
+    <script>
+        function showMessage() {
+            createHeartEffect();
+            createFireworks();
+        }
+
+        function createHeartEffect() {
+            for (let i = 0; i < 20; i++) {
+                let heart = document.createElement("div");
+                heart.classList.add("heart-effect");
+                heart.innerHTML = "❤️";
+                document.body.appendChild(heart);
+                
+                let x = Math.random() * window.innerWidth;
+                let y = Math.random() * window.innerHeight;
+                heart.style.left = `${x}px`;
+                heart.style.top = `${y}px`;
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 2000);
+            }
+        }
+
+        function createFireworks() {
+            for (let i = 0; i < 10; i++) {
+                let firework = document.createElement("div");
+                firework.classList.add("firework");
+                firework.innerHTML = "✨";
+                document.body.appendChild(firework);
+                
+                let x = Math.random() * window.innerWidth;
+                let y = Math.random() * window.innerHeight;
+                firework.style.left = `${x}px`;
+                firework.style.top = `${y}px`;
+                
+                setTimeout(() => {
+                    firework.remove();
+                }, 2000);
+            }
+        }
+        
+        function showLetter() {
+            document.getElementById("letter").style.display = "block";
+        }
+    </script>
+</body>
+</html>
